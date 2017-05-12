@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Arduinodevices list</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Accesskey</th>
+                <th>Temperaturemax</th>
+                <th>Temperaturemin</th>
+                <th>Alarmed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for arduinoDevice in arduinoDevices %}
+            <tr>
+                <td><a href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">{{ arduinoDevice.id }}</a></td>
+                <td>{{ arduinoDevice.name }}</td>
+                <td>{{ arduinoDevice.accessKey }}</td>
+                <td>{{ arduinoDevice.temperatureMax }}</td>
+                <td>{{ arduinoDevice.temperatureMin }}</td>
+                <td>{% if arduinoDevice.alarmed %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('arduinodevice_new') }}">Create a new arduinoDevice</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Arduinodevice</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ arduinoDevice.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ arduinoDevice.name }}</td>
+            </tr>
+            <tr>
+                <th>Accesskey</th>
+                <td>{{ arduinoDevice.accessKey }}</td>
+            </tr>
+            <tr>
+                <th>Temperaturemax</th>
+                <td>{{ arduinoDevice.temperatureMax }}</td>
+            </tr>
+            <tr>
+                <th>Temperaturemin</th>
+                <td>{{ arduinoDevice.temperatureMin }}</td>
+            </tr>
+            <tr>
+                <th>Alarmed</th>
+                <td>{% if arduinoDevice.alarmed %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('arduinodevice_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

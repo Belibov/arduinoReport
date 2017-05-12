@@ -1,0 +1,31 @@
+<?php
+
+namespace AppBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+ * @MongoDB\Document
+ */
+class Sound
+{
+    /**
+     * @MongoDB\Id
+     */
+    protected $id;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $arduinoName;
+
+    /**
+     * @MongoDB\Field(type="int")
+     */
+    protected $time;
+
+    /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $sound;
+}

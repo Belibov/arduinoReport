@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Data from {{ name }}</h1>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Real Feel</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for temperature in temperatures %}
+            <tr>
+                <td>{{ temperature.temperature }}</td>
+                <td>{{ temperature.humidity }}</td>
+                <td>{{ temperature.feeledTemperature }}</td>
+                <td>{{ temperature.time|date("m/d/Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Sound</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sound in sounds %}
+            <tr>
+                <td>{{ sound.sound }}</td>
+                <td>{{ sound.time|date("m/d/Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Movement</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for move in movements %}
+            <tr>
+                <td>{{ move.movement }}</td>
+                <td>{{ move.time|date("m/d/Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
