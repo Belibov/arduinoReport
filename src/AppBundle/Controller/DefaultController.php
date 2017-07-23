@@ -60,7 +60,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/move", name="movement")
+     * @Route("/moving", name="moving")
      */
     public function movementAction(Request $request)
     {
@@ -122,15 +122,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/data/{name}", name="arduino_data")
+     * @Route("/data/{id}", name="arduino_data")
      */
-    public function dataAction($name)
+    public function dataAction($id)
     {
+        $arduinoDeviceRepo = $this->getDoctrine()->getRepository(ArduinoDevice::class);
+        $device = $arduinoDeviceRepo->find($id);
+        $name = $device->getName();
         $mongo = $this->get('doctrine_mongodb')->getManager();
         $temperatures = $mongo->createQueryBuilder('AppBundle:Temperature')
             ->field('arduinoName')->equals($name)
             ->sort('time', 'DESC')
-            ->limit(100)
+            ->limit(200)
             ->getQuery()
             ->execute();
 
@@ -148,11 +151,20 @@ class DefaultController extends Controller
             ->getQuery()
             ->execute();
 
+        $sounds = iterator_to_array($sounds);
+        $temperatures = iterator_to_array($temperatures);
+        $movements = iterator_to_array($movements);
+
+        $sound = reset($sounds);
+        $movement = reset($movements);
+
         return $this->render('data/data.html.twig',
             [
                 'name'          => $name,
                 'temperatures'  => $temperatures,
                 'sounds'        => $sounds,
+                'sound'         => $sound,
+                'movement'      => $movement,
                 'movements'     => $movements,
             ]);
     }

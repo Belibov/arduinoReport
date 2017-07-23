@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Arduinodevices list</h1>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h1>Systems list</h1>
 
-    <table border="1">
-        <thead>
+        <table border="1" class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -14,34 +16,39 @@
                 <th>Alarmed</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for arduinoDevice in arduinoDevices %}
-            <tr>
-                <td><a href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">{{ arduinoDevice.id }}</a></td>
-                <td>{{ arduinoDevice.name }}</td>
-                <td>{{ arduinoDevice.accessKey }}</td>
-                <td>{{ arduinoDevice.temperatureMax }}</td>
-                <td>{{ arduinoDevice.temperatureMin }}</td>
-                <td>{% if arduinoDevice.alarmed %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for arduinoDevice in arduinoDevices %}
+                <tr>
+                    <td><a href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">{{ arduinoDevice.id }}</a></td>
+                    <td>{{ arduinoDevice.name }}</td>
+                    <td>{{ arduinoDevice.accessKey }}</td>
+                    <td>{{ arduinoDevice.temperatureMax }}</td>
+                    <td>{{ arduinoDevice.temperatureMin }}</td>
+                    <td>{% if arduinoDevice.alarmed %}Yes{% else %}No{% endif %}</td>
+                    <td>
+                        <ul style="list-style-type: none; margin: 0; padding: 4px;">
+                            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                                <a class="btn btn-info" href="{{ path('arduinodevice_show', { 'id': arduinoDevice.id }) }}">show</a>
+                            </li>
+                            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                                <a class="btn btn-default" href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">edit</a>
+                            </li>
+                            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                                <a class="btn btn-primary" href="{{ path('arduino_data', { 'id': arduinoDevice.id }) }}">data</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('arduinodevice_new') }}">Create a new arduinoDevice</a>
-        </li>
-    </ul>
+        <ul style="list-style-type: none;">
+            <li>
+                <a class="btn btn-success" href="{{ path('arduinodevice_new') }}">Create a new device entity</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-1"></div>
 {% endblock %}

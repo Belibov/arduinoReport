@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Arduinodevice</h1>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h1>Arduino device</h1>
 
-    <table>
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ arduinoDevice.id }}</td>
@@ -29,20 +31,24 @@
                 <th>Alarmed</th>
                 <td>{% if arduinoDevice.alarmed %}Yes{% else %}No{% endif %}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('arduinodevice_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <ul style="list-style-type: none; margin: 0; padding: 4px;">
+            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                <a class="btn btn-default" href="{{ path('arduinodevice_index') }}">Back to the list</a>
+            </li>
+            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                <a class="btn btn-info" href="{{ path('arduinodevice_edit', { 'id': arduinoDevice.id }) }}">Edit</a>
+            </li>
+        </ul>
+        <ul style="list-style-type: none; margin: 0; padding: 4px;">
+            <li style="display: inline; margin-right: 5px; padding: 3px;">
+                {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-1"></div>
 {% endblock %}
